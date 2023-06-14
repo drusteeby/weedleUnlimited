@@ -1,20 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
-import AutoSelect from './Components/AutoSelect';
 import pokedex from './Data/pokedex.json'
 import GuessTable from './Components/GuessTable';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import DropdownList from "react-widgets/Combobox";
 import "react-widgets/styles.css";
 import { Combobox } from 'react-widgets';
+import React, { useState } from 'react';
 
 function App()
 {
 
-  let pokeNames = pokedex.map((entry) => entry.name.english);
   let correctAnswer = pokedex.find(entry => entry.name.english === "Weedle");
 
-  let onGuessSubmitted = (guess) => console.log(guess);
+  const [previousGusses, setPreviousGusses] = useState([]);
+  let onGuessSubmitted = (guess) =>
+  {
+    setPreviousGusses([...previousGusses, guess]);
+  }
 
   return (
     <div className="App">
@@ -29,15 +30,19 @@ function App()
         <div className='row justify-content-center'>
           <div className='col-1' />
           <div className='col-5'>
-            <Combobox data={pokeNames}
-              onSelect={onGuessSubmitted} />
+            <Combobox data={pokedex} 
+                      onSelect={onGuessSubmitted} 
+                      textField={(item) =>
+                      {
+                        return typeof item === 'string' ? item : (item.name.english);
+                      }}/>              
           </div>
           <div className='col-1' />
         </div>
         <div className='row justify-content-center'>
           <div className='col-1' />
           <div className='col-5'>
-            <GuessTable guesses={pokedex} correctAnswer={correctAnswer} />
+            <GuessTable guesses={previousGusses} correctAnswer={correctAnswer} />
           </div>
           <div className='col-1' />
         </div>
