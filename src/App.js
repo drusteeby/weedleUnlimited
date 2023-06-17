@@ -38,36 +38,34 @@ function App()
 
     if (guess.id == correctAnswer.id)
     {
-      setPopupContent(GeneratePopupContent(true));
-      return
+      DisplayEndGamePopup(true);
     }
-
-    if (guessNumber >= maxGuessAttempts)
+    else if (guessNumber >= maxGuessAttempts)
     {
-      setPopupContent(GeneratePopupContent(false));
-      return
+      DisplayEndGamePopup(false);
     }
   }
 
-  let GeneratePopupContent = (winner) => 
+  let DisplayEndGamePopup = (winner) => 
   {
     setpopupIsOpen(true);
-    if (winner)
-    {
-      return <>
+    let content = (winner) ?
+
+      <>
         <div> You Win! </div>
         <button onClick={resetGame}>
           Reset Game
         </button>
       </>
-    }
+      :
+      <>
+        <div>{format("The correct answer was {0}", correctAnswer.name.english)}</div>
+        <button onClick={resetGame}>
+          Reset Game
+        </button>
+      </>
 
-    return <>
-      <div>{format("The correct answer was {0}", correctAnswer.name.english)}</div>
-      <button onClick={resetGame}>
-        Reset Game
-      </button>
-    </>
+    setPopupContent(content);
   }
 
   return (
