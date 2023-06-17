@@ -39,11 +39,13 @@ function App()
     if (guess.id == correctAnswer.id)
     {
       setPopupContent(GeneratePopupContent(true));
+      return
     }
 
     if (guessNumber >= maxGuessAttempts)
     {
       setPopupContent(GeneratePopupContent(false));
+      return
     }
   }
 
