@@ -7,21 +7,25 @@ import { Combobox } from 'react-widgets';
 import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import { format } from 'react-string-format';
 
 function App()
 {
 
   let correctAnswer = pokedex.find(entry => entry.name.english === "Weedle");
+  console.log(correctAnswer);
 
   const [previousGuesses, setPreviousGuesses] = useState([]);
   const [guessAttempts, setguessAttempts] = useState(0);
   const [popupIsOpen, setpopupIsOpen] = useState(false);
-  const [maxGuessAttempts, setMaxGuessAttempts] = useState(8);
+  const [maxGuessAttempts, setMaxGuessAttempts] = useState(4);
 
   let onGuessSubmitted = (guess) =>
   {
+    let guessNumber = guessAttempts + 1;
+
     setPreviousGuesses([...previousGuesses, guess]);    
-    setguessAttempts(guessAttempts + 1);
+    setguessAttempts(guessNumber);
 
     if(guess.id == correctAnswer.id)
     {
@@ -29,7 +33,7 @@ function App()
       return;
     }
 
-    if(guessAttempts = maxGuessAttempts)
+    if(guessNumber >= maxGuessAttempts)
     {
       setpopupIsOpen(true);
     }
@@ -37,12 +41,15 @@ function App()
 
   return (
     <div className="App">
-      <Popup open={popupIsOpen} position="right center" modal>
+      <Popup open={popupIsOpen} 
+             position="right center"
+             closeOnDocumentClick={false}
+             closeOnEscape={false}>
         <div>Popup content here !!</div>
       </Popup>
       <h1 className="App-header"> Weedle Unlimited</h1>
       <h2 className="App-caption">WEEDLE GUESSING GAME</h2>
-      <h3>{guessAttempts + ' of 8 guesses'}</h3>
+      <h4>{format('{0} of {1} guesses', guessAttempts,maxGuessAttempts)}</h4>
       <div className='justify-content-center'>
         <div className='row justify-content-center'>
           <div className='col-1' />
@@ -58,18 +65,12 @@ function App()
         </div>
         <div className='row justify-content-center'>
           <div className='col-1' />
-          <div className='col-5'>
+          <div className='col-10'>
             <GuessTable guesses={previousGuesses} correctAnswer={correctAnswer} />
           </div>
           <div className='col-1' />
         </div>
-
       </div>
-
-
-
-
-
     </div>
   );
 }
