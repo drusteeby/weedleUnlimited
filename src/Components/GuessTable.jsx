@@ -23,9 +23,6 @@ const GuessTable = ({ guesses, correctAnswer }) =>
             <div className="col">Sp. Attack</div>
             <div className="col">Sp. Defense</div>
             <div className="col">Speed</div>
-
-
-
         </div>
         {guesses.map(guess => <div key={guess.id} className="d-flex flex-row justify-content-center mb-3">
             <div className="col fw-bold">
@@ -41,7 +38,6 @@ const GuessTable = ({ guesses, correctAnswer }) =>
                 </>
             )}
             <StatBox guess={guess.base.HP} correctStat={correctAnswer.base.HP} />
-
             <StatBox guess={guess.base.Attack} correctStat={correctAnswer.base.Attack} />
             <StatBox guess={guess.base.Defense} correctStat={correctAnswer.base.Defense} />
             <StatBox guess={guess.base.SpecialAttack} correctStat={correctAnswer.base.SpecialAttack} />
