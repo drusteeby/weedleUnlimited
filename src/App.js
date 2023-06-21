@@ -9,12 +9,14 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { format } from 'react-string-format';
 
-function App()
+function App({difficulty})
 {
 
 
   let correctAnswer = pokedex.find(entry => entry.name.english === "Weedle");
-  console.log(correctAnswer);
+  console.log(difficulty);
+
+
 
   const [previousGuesses, setPreviousGuesses] = useState([]);
   const [guessAttempts, setguessAttempts] = useState(0);

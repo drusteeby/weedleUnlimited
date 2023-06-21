@@ -4,11 +4,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "@fontsource/readex-pro";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ChooseDifficulty from './Components/ChooseDifficulty';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Routes>
+        <Route path="/weedleUnlimited" element={<ChooseDifficulty />} />
+        <Route path="/Normal" element={<App difficulty={0} />} />
+        <Route path="/Hard" element={<App difficulty={1} />} />
+      </Routes>
+    </Router>
   </React.StrictMode>
 );
 
