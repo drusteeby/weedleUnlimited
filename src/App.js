@@ -9,19 +9,45 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { format } from 'react-string-format';
 
-function App({difficulty})
+function App({ difficulty })
 {
 
+  let genOnePokemon = pokedex.slice(0, 151);
 
-  let correctAnswer = pokedex.find(entry => entry.name.english === "Weedle");
+  let difficultyBasedParamaters =
+  {
+    "SuperEasy":
+    {
+      "maxGuessAttempts": 420,
+      "correctAnswer": genOnePokemon.find(entry => entry.name.english === "Weedle")
+    },
+    "Normal":
+    {
+      "maxGuessAttempts": 10,
+      "correctAnswer": genOnePokemon[Math.floor(Math.random() * genOnePokemon.length)]
+    },
+    "Hard":
+    {
+      "maxGuessAttempts": 8,
+      "correctAnswer": genOnePokemon[Math.floor(Math.random() * genOnePokemon.length)]
+    }
+  };
+
+  const [difficultyParamaters, setdifficultyParamaters] = useState(() =>
+  {
+    return difficultyBasedParamaters[difficulty];
+  });
+
   console.log(difficulty);
+  console.log(difficultyParamaters);
+
+  let correctAnswer = difficultyParamaters.correctAnswer;
 
 
 
   const [previousGuesses, setPreviousGuesses] = useState([]);
   const [guessAttempts, setguessAttempts] = useState(0);
   const [popupIsOpen, setpopupIsOpen] = useState(false);
-  const [maxGuessAttempts, setMaxGuessAttempts] = useState(4);
   const [popupContent, setPopupContent] = useState("");
 
   let resetGame = () =>
@@ -33,16 +59,16 @@ function App({difficulty})
 
   let onGuessSubmitted = (guess) =>
   {
-    let guessNumber = guessAttempts + 1;
+    let guessAttempt = guessAttempts + 1;
 
     setPreviousGuesses([...previousGuesses, guess]);
-    setguessAttempts(guessNumber);
+    setguessAttempts(guessAttempt);
 
     if (guess.id == correctAnswer.id)
     {
       DisplayEndGamePopup(true);
     }
-    else if (guessNumber >= maxGuessAttempts)
+    else if (guessAttempt >= difficultyParamaters.maxGuessAttempts)
     {
       DisplayEndGamePopup(false);
     }
@@ -80,12 +106,12 @@ function App({difficulty})
       </Popup>
       <h1 className="App-header"> Weedle Unlimited</h1>
       <h2 className="App-caption">WEEDLE GUESSING GAME</h2>
-      <h4>{format('{0} of {1} guesses', guessAttempts, maxGuessAttempts)}</h4>
+      <h4>{format('{0} of {1} guesses', guessAttempts, difficultyParamaters.maxGuessAttempts)}</h4>
       <div className='justify-content-center'>
         <div className='row justify-content-center'>
           <div className='col-1' />
           <div className='col-5'>
-            <Combobox data={pokedex}
+            <Combobox data={genOnePokemon}
               onSelect={onGuessSubmitted}
               textField={(item) =>
               {

@@ -13,8 +13,9 @@ root.render(
     <Router>
       <Routes>
         <Route path="/weedleUnlimited" element={<ChooseDifficulty />} />
-        <Route path="/Normal" element={<App difficulty={0} />} />
-        <Route path="/Hard" element={<App difficulty={1} />} />
+        <Route path="/SuperEasy" element={<App difficulty={'SuperEasy'} />} />
+        <Route path="/Normal" element={<App difficulty={'Normal'} />} />
+        <Route path="/Hard" element={<App difficulty={'Hard'} />} />
       </Routes>
     </Router>
   </React.StrictMode>
