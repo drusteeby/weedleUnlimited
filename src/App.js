@@ -14,47 +14,46 @@ function App({ difficulty })
 
   let genOnePokemon = pokedex.slice(0, 151);
 
-  let difficultyBasedParamaters =
+
+  let difficultySettings = {
+      "SuperEasy":
+      {
+        "maxGuessAttempts": 420
+      },
+      "Normal":
+      {
+        "maxGuessAttempts": 10
+      },
+      "Hard":
+      {
+        "maxGuessAttempts": 8
+      }
+    };
+
+  console.log(difficultySettings);
+
+  const generateCorrectAnswer = () => 
   {
-    "SuperEasy":
-    {
-      "maxGuessAttempts": 420,
-      "correctAnswer": genOnePokemon.find(entry => entry.name.english === "Weedle")
-    },
-    "Normal":
-    {
-      "maxGuessAttempts": 10,
-      "correctAnswer": genOnePokemon[Math.floor(Math.random() * genOnePokemon.length)]
-    },
-    "Hard":
-    {
-      "maxGuessAttempts": 8,
-      "correctAnswer": genOnePokemon[Math.floor(Math.random() * genOnePokemon.length)]
-    }
-  };
-
-  const [difficultyParamaters, setdifficultyParamaters] = useState(() =>
-  {
-    return difficultyBasedParamaters[difficulty];
-  });
-
-  console.log(difficulty);
-  console.log(difficultyParamaters);
-
-  let correctAnswer = difficultyParamaters.correctAnswer;
-
-
+    if(difficulty != "SuperEasy")
+      {
+        return genOnePokemon[Math.floor(Math.random() * genOnePokemon.length)];
+      }
+      return genOnePokemon[12]; //Weedle
+  }
 
   const [previousGuesses, setPreviousGuesses] = useState([]);
   const [guessAttempts, setguessAttempts] = useState(0);
   const [popupIsOpen, setpopupIsOpen] = useState(false);
   const [popupContent, setPopupContent] = useState("");
+  const [correctAnswer, setCorrectAnswer] = useState(generateCorrectAnswer());
 
   let resetGame = () =>
   {
     setPreviousGuesses([]);
     setguessAttempts(0);
     setpopupIsOpen(false);
+    
+    setCorrectAnswer(generateCorrectAnswer());
   };
 
   let onGuessSubmitted = (guess) =>
@@ -68,7 +67,7 @@ function App({ difficulty })
     {
       DisplayEndGamePopup(true);
     }
-    else if (guessAttempt >= difficultyParamaters.maxGuessAttempts)
+    else if (guessAttempt >= difficultySettings[difficulty].maxGuessAttempts)
     {
       DisplayEndGamePopup(false);
     }
@@ -105,8 +104,8 @@ function App({ difficulty })
         {popupContent}
       </Popup>
       <h1 className="App-header"> Weedle Unlimited</h1>
-      <h2 className="App-caption">WEEDLE GUESSING GAME</h2>
-      <h4>{format('{0} of {1} guesses', guessAttempts, difficultyParamaters.maxGuessAttempts)}</h4>
+      <h2 className="App-caption">POCKET MONSTERS GUESSING GAME</h2>
+      <h4>{format('{0} of {1} guesses', guessAttempts, difficultySettings[difficulty].maxGuessAttempts)}</h4>
       <div className='justify-content-center'>
         <div className='row justify-content-center'>
           <div className='col-1' />
