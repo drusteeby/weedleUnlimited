@@ -12,9 +12,9 @@ import StatBox from "./StatBox";
 const GuessTable = ({ guesses, correctAnswer }) =>
 {
     return <>
-        <div className="row justify-content-center mb-3" style={{ backgroundColor: 'transparent' }}>
+        <div className="d-flex align-items-center justify-content-center col fw-bold" style={{ backgroundColor: 'transparent' }}>
             <div className="col">Name</div>
-            <div className="col">Types(s)</div>
+            <div className="col">Type(s)</div>
             <div className="col">HP</div>
             <div className="col">Attack</div>
             <div className="col">Defense</div>
@@ -23,11 +23,12 @@ const GuessTable = ({ guesses, correctAnswer }) =>
             <div className="col">Speed</div>
         </div>
         {guesses.map(guess =>
-            <div key={guess.id} className="d-flex flex-row justify-content-center mb-3">
-                <div className="col fw-bold">
-                    <p>
+            <div key={guess.id} className="d-flex flex-row 
+            bg-body border-bottom border-dark border-3">
+                <div className="d-flex align-items-center justify-content-center col fw-bold">
+                    <div>
                         {guess.name.english}
-                    </p>
+                    </div>
                 </div>
                 <div className="col">
                     {guess.type.map(type =>
