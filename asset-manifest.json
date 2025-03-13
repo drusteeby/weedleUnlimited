@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/weedleUnlimited/static/css/main.dd6ca626.css",
-    "main.js": "/weedleUnlimited/static/js/main.60b6a5ce.js",
+    "main.js": "/weedleUnlimited/static/js/main.b9485289.js",
     "static/js/787.1a76c63e.chunk.js": "/weedleUnlimited/static/js/787.1a76c63e.chunk.js",
     "static/media/readex-pro-all-400-normal.woff": "/weedleUnlimited/static/media/readex-pro-all-400-normal.4f37e3f5f873ac8cdd39.woff",
     "static/media/readex-pro-latin-400-normal.woff2": "/weedleUnlimited/static/media/readex-pro-latin-400-normal.7f8cf9d4a1810cb9097f.woff2",
@@ -10,11 +10,11 @@
     "static/media/readex-pro-vietnamese-400-normal.woff2": "/weedleUnlimited/static/media/readex-pro-vietnamese-400-normal.e3586e451a960af73c60.woff2",
     "index.html": "/weedleUnlimited/index.html",
     "main.dd6ca626.css.map": "/weedleUnlimited/static/css/main.dd6ca626.css.map",
-    "main.60b6a5ce.js.map": "/weedleUnlimited/static/js/main.60b6a5ce.js.map",
+    "main.b9485289.js.map": "/weedleUnlimited/static/js/main.b9485289.js.map",
     "787.1a76c63e.chunk.js.map": "/weedleUnlimited/static/js/787.1a76c63e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.dd6ca626.css",
-    "static/js/main.60b6a5ce.js"
+    "static/js/main.b9485289.js"
   ]
 }
